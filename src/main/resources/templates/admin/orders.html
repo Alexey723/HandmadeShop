@@ -13,12 +13,12 @@
 </form>
 <br>
 
-<!--<h3>Поиск</h3>
+<h3>Поиск</h3>
 <form th:method="POST" th:action="@{/admin/orders/search}">
     <fieldset>
         <legend>Поиск:</legend>
         <label for="search">Введите последних 4 буквы/цифры номера заказа</label>
-        <input type="text" id="search" name="search" th:value="*{value_search}">
+        <input type="text" id="search" maxlength="4" name="search" th:value="*{value_search}">
             <br>
             <input type="submit" value="Найти">
         </div>
@@ -26,7 +26,7 @@
 </form>
 <hr>
 <h3>Результат поиска</h3>
-<div th:each="order : ${orders}">
+<div th:each="order : ${search_orders}">
     <h3 th:text="'Заказ №' + ${order.getNumber()}"></h3>
     <img th:src="'/img/' + ${order.getProduct().getImageList()[0].getFileName()}" width="300px">
     <p th:text="'Пользователь: ' + ${order.getPerson().getLogin()}">
@@ -37,7 +37,7 @@
     <p th:text="'Cтатус: ' + ${order.getStatus()}">
     <hr>
 </div>
-<hr>-->
+<hr>
 
 <div th:each="order : ${orders}">
     <h3 th:text="'Заказ №' + ${order.getNumber()}"></h3>
@@ -58,6 +58,10 @@
             </option>
         </select>
     <input type="submit" value="Изменить статус">
+    </form>
+<br>
+    <form th:method="GET" th:action="@{/admin/order/delete/{id}(id=${order.getId()})}" th:object="${order}">
+        <input type="submit" value="Удалить заказ">
     </form>
 
     <hr>

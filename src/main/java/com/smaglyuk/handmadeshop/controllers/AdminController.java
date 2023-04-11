@@ -2,8 +2,7 @@ package com.smaglyuk.handmadeshop.controllers;
 
 import com.smaglyuk.handmadeshop.enumm.Status;
 import com.smaglyuk.handmadeshop.models.*;
-import com.smaglyuk.handmadeshop.repositories.CategoryRepository;
-import com.smaglyuk.handmadeshop.repositories.OrderRepository;
+import com.smaglyuk.handmadeshop.services.CategoryService;
 import com.smaglyuk.handmadeshop.services.OrderService;
 import com.smaglyuk.handmadeshop.services.PersonService;
 import com.smaglyuk.handmadeshop.services.ProductService;
@@ -25,37 +24,31 @@ public class AdminController {
 
     private final ProductService productService;
     private final PersonService personService;
-    private final PersonValidator personValidator;
     private final OrderService orderService;
-    private final OrderRepository orderRepository;
+    private final CategoryService categoryService;
 
     @Value("${upload.path}")
     private String uploadPath;
 
-    private final CategoryRepository categoryRepository;
-
-    public AdminController(ProductService productService, PersonService personService, PersonValidator personValidator, OrderService orderService, OrderRepository orderRepository, CategoryRepository categoryRepository) {
+    public AdminController(ProductService productService, PersonService personService, OrderService orderService, CategoryService categoryService) {
         this.productService = productService;
         this.personService = personService;
-        this.personValidator = personValidator;
+        this.categoryService = categoryService;
         this.orderService = orderService;
-
-        this.orderRepository = orderRepository;
-        this.categoryRepository = categoryRepository;
     }
 
     @GetMapping("admin/product/add")
     public String addProduct(Model model){
         model.addAttribute("product", new Product());
-        model.addAttribute("category", categoryRepository.findAll());
+        model.addAttribute("category", categoryService.getAllCategories());
         return "product/addProduct";
     }
 
     @PostMapping("/admin/product/add")
     public String addProduct(@ModelAttribute("product") @Valid Product product, BindingResult bindingResult, @RequestParam("file_one")MultipartFile file_one, @RequestParam("file_two")MultipartFile file_two, @RequestParam("file_three")MultipartFile file_three, @RequestParam("file_four")MultipartFile file_four, @RequestParam("file_five")MultipartFile file_five, @RequestParam("category") int category, Model model) throws IOException {
-        Category category_db = (Category) categoryRepository.findById(category).orElseThrow();
+        Category category_db = (Category) categoryService.getCategoryId(category);
         if(bindingResult.hasErrors()){
-            model.addAttribute("category", categoryRepository.findAll());
+            model.addAttribute("category", categoryService.getAllCategories());
             return "product/addProduct";
         }
 
@@ -150,14 +143,14 @@ public class AdminController {
     @GetMapping("admin/product/edit/{id}")
     public String editProduct(Model model, @PathVariable("id") int id){
         model.addAttribute("product", productService.getProductId(id));
-        model.addAttribute("category", categoryRepository.findAll());
+        model.addAttribute("category", categoryService.getAllCategories());
         return "product/editProduct";
     }
 
     @PostMapping("admin/product/edit/{id}")
     public String editProduct(@ModelAttribute("product") @Valid Product product, BindingResult bindingResult, @PathVariable("id") int id, Model model){
         if(bindingResult.hasErrors()){
-            model.addAttribute("category", categoryRepository.findAll());
+            model.addAttribute("category", categoryService.getAllCategories());
             return "product/editProduct";
         }
         productService.updateProduct(id, product);
@@ -194,16 +187,27 @@ public class AdminController {
 
     @GetMapping("/admin/orders")
     public String ordersView(Model model) {
-        model.addAttribute("orders", orderRepository.findAll());
+        model.addAttribute("orders", orderService.getAllOrders());
         return "admin/orders";
     }
 
     @GetMapping("/admin/orders/change_status/{id}")
     public String updateOrderStatus(@PathVariable("id") int id, @RequestParam("statusValue") Status status){
-        /*model.addAttribute("order", order);
-        model.addAttribute("status", status);*/
         orderService.updateOrderStatus(status, id);
         return "redirect:/admin/orders";
+    }
 
+    @PostMapping("/admin/orders/search")
+    public String orderSearch(@RequestParam("search") String search, Model model){
+        model.addAttribute("orders", orderService.getAllOrders());
+        model.addAttribute("search_orders", orderService.findOrderByNumber(search));
+        model.addAttribute("value_search", search);
+        return "/admin/orders";
+    }
+
+    @GetMapping("admin/order/delete/{id}")
+    public String deleteOrder(@PathVariable("id") int id) {
+       orderService.deleteOrder(id);
+        return "redirect:/admin/orders";
     }
 }
