@@ -198,11 +198,12 @@ public class AdminController {
         return "admin/orders";
     }
 
-    @PostMapping("/admin/orders/change_status/{id}")
-    public String updateOrderStatus(@Valid Status status, @PathVariable("id") int id, Model model){
-        model.addAttribute("status", status);
-        orderService.updateOrderStatus(status.ordinal(), id);
-        return "redirect:/order";
+    @GetMapping("/admin/orders/change_status/{id}")
+    public String updateOrderStatus(@PathVariable("id") int id, @RequestParam("statusValue") Status status){
+        /*model.addAttribute("order", order);
+        model.addAttribute("status", status);*/
+        orderService.updateOrderStatus(status, id);
+        return "redirect:/admin/orders";
 
     }
 }
