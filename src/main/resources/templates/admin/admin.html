@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет администратора</title>
+</head>
+<body>
+<h1>Личный кабинет администратора</h1>
+<form method="post" th:action="@{/logout}">
+    <input type="hidden" th:name="_csrf.parameterName" th:value="${_csrf.token}">
+    <button type="submit">Выйти из личного кабинета</button>
+</form>
+<br>
+<form method="get" th:action="@{/admin/orders}">
+    <button type="submit">Посмотреть заказы</button>
+</form>
+<br>
+<form method="get" th:action="@{/users_edit}">
+    <button type="submit">Просмотр и редактирование пользователя</button>
+</form>
+<br>
+<form method="get" th:action="@{/}">
+    <button type="submit">Посмотреть все товары</button>
+</form>
+<br>
+<form method="get" th:action="@{admin/product/add}">
+    <button type="submit">Добавить товар</button>
+</form>
+<hr>
+<div th:each="product : ${products}">
+    <p th:text="'Наименование: ' + ${product.getTitle()}"></p>
+    <p th:text="'Описание: ' + ${product.getDescription()}"></p>
+    <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+    <p th:text="'Cклад: ' + ${product.getWarehouse()}"></p>
+    <p th:text="'Продавец: ' + ${product.getSeller()}"></p>
+    <p th:text="'Категория: ' + ${product.getCategory().getName()}"></p>
+    <a th:href="@{/admin/product/edit/{id}(id=${product.getId()})}">Редактирование товара</a>
+    <a th:href="@{/admin/product/delete/{id}(id=${product.getId()})}">Удаление товара</a>
+    <hr>
+</div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Просмотр и смена ролей пользователей</title>
+</head>
+<body>
+<h2>Просмотр и смена ролей пользователей</h2>
+<br>
+<form th:method="GET" th:action="@{/admin}">
+    <input type="submit" value="На главную">
+</form>
+<br>
+<div th:each="persons : ${person}">
+    <p th:text="'Логин: ' + ${persons.getLogin}"></p>
+    <p th:text="'Роль: ' + ${persons.getRole}"></p>
+    <form th:method="POST" th:if="${not persons.role.equals('ROLE_USER')}" th:action="@{/admin/person/editToUser/{id}(id=${persons.getId()})}" th:object="${persons}">
+        <input type="submit" value="Сменить роль на Пользователя">
+    </form>
+    <form th:method="POST" th:if="${not persons.role.equals('ROLE_ADMIN')}" th:action="@{/admin/person/editToAdmin/{id}(id=${persons.getId()})}" th:object="${persons}">
+        <input type="submit" value="Сменить роль на Администраторскую">
+    </form>
+<br>
+    <form th:method="GET" th:if="${persons.getId()!=0}" th:action="@{/admin/person/delete/{id}(id=${persons.getId()})}" th:object="${persons}">
+        <input type="submit" value="Удалить пользователя">
+    </form>
+
+<hr>
+</div>
+
+</body>
+</html>
