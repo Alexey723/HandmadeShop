@@ -27,14 +27,6 @@ public class Product {
     @Min(value = 1 , message = "Цена товара не может быть отрицательной или нулевой")
     private float price;
 
-    @Column(name = "warehouse", nullable = false)
-    @NotEmpty(message = "Cклад по нахождению товара не может быть пустым")
-    private String warehouse;
-
-    @Column(name = "seller", nullable = false)
-    @NotEmpty(message = "Информация о продавце не может быть пустой")
-    private String seller;
-
     @ManyToOne(optional = false)
     private Category category;
 
@@ -61,12 +53,10 @@ public class Product {
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
     private List<Order> orderList;
 
-    public Product(String title, String description, float price, String warehouse, String seller, Category category, LocalDateTime dateTime, List<Image> imageList) {
+    public Product(String title, String description, float price, Category category, LocalDateTime dateTime, List<Image> imageList) {
         this.title = title;
         this.description = description;
         this.price = price;
-        this.warehouse = warehouse;
-        this.seller = seller;
         this.category = category;
         this.dateTime = dateTime;
         this.imageList = imageList;
@@ -105,22 +95,6 @@ public class Product {
 
     public void setPrice(float price) {
         this.price = price;
-    }
-
-    public String getWarehouse() {
-        return warehouse;
-    }
-
-    public void setWarehouse(String warehouse) {
-        this.warehouse = warehouse;
-    }
-
-    public String getSeller() {
-        return seller;
-    }
-
-    public void setSeller(String seller) {
-        this.seller = seller;
     }
 
     public Category getCategory() {

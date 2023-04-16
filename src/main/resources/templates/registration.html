@@ -12,6 +12,26 @@
     <input type="text" th:field="*{login}" id="login">
     <div style="color: red" th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></div>
     <br>
+    <label for="lastName">Введите фамилию: </label>
+    <input type="text" th:field="*{lastName}" id="lastName">
+    <div style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+    <br>
+    <label for="firstName">Введите имя: </label>
+    <input type="text" th:field="*{firstName}" id="firstName">
+    <div style="color: red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+    <br>
+    <label for="patronymic">Введите отчество: </label>
+    <input type="text" th:field="*{patronymic}" id="patronymic">
+    <div style="color: red" th:if="${#fields.hasErrors('patronymic')}" th:errors="*{patronymic}"></div>
+    <br>
+    <label for="address">Введите адрес: </label>
+    <input type="text" th:field="*{address}" id="address">
+    <div style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div>
+    <br>
+    <label for="email">Введите e-mail: </label>
+    <input type="email" th:field="*{email}" id="email">
+    <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+    <br>
     <label for="password">Введите пароль: </label>
     <input type="password" th:field="*{password}" id="password">
     <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>

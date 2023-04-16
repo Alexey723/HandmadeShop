@@ -13,6 +13,11 @@
 <br>
 <div th:each="persons : ${person}">
     <p th:text="'Логин: ' + ${persons.getLogin}"></p>
+    <p th:text="'Фамилия: ' + ${persons.getLastName()}"></p>
+    <p th:text="'Имя: ' + ${persons.getFirstName()}"></p>
+    <p th:text="'Отчество: ' + ${persons.getPatronymic()}"></p>
+    <p th:text="'Адрес: ' + ${persons.getAddress()}"></p>
+    <p th:text="'E-mail: ' + ${persons.getEmail()}"></p>
     <p th:text="'Роль: ' + ${persons.getRole}"></p>
     <form th:method="POST" th:if="${not persons.role.equals('ROLE_USER')}" th:action="@{/admin/person/editToUser/{id}(id=${persons.getId()})}" th:object="${persons}">
         <input type="submit" value="Сменить роль на Пользователя">
