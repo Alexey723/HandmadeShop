@@ -28,7 +28,7 @@ public class SecurityConfig{
                 // c помощью permitAll указываем что не аутентифицированные пользователи могут заходить на перечисленные страницы
                 // указываем что для всех остальных страниц необходимо вызывать метод authenticated(), который открывает форму аутентификации
 //                .anyRequest().authenticated()
-                .requestMatchers("/authentication", "/registration", "/error", "/resources/**", "/static/**", "/css/**", "/js/**", "/img/**", "/product/product", "/product/info/{id}", "/product/search", "/").permitAll()
+                .requestMatchers("/authentication", "/registration", "/error", "/media/**","/media/scripts/**", "/resources/**", "/static/**", "/css/**", "/js/**", "/img/**", "/product/product", "/product/info/{id}", "/product/search", "/").permitAll()
                 .anyRequest().hasAnyRole("USER", "ADMIN")
                 .and() // указываем что дальше настраиватеся аутентификация и соединяем ее с настройкой доступа
                 .formLogin().loginPage("/authentication") // указываем какой url запрос будет отправлятся при заходе на защищенные страницы
@@ -36,7 +36,7 @@ public class SecurityConfig{
                 .defaultSuccessUrl("/person account", true) // Указываем на какой url необходимо направить пользователя после успешной аутентификации. Вторым аргументом указывается true чтобы перенаправление шло в любом случае послу успешной аутентификации
                 .failureUrl("/authentication?error") // Указываем куда необходимо перенаправить пользователя при проваленной аутентификации. В запрос будет передан объект error, который будет проверятся на форме и при наличии данного объекта в запросе выводится сообщение "Неправильный логин или пароль"
                 .and()
-                .logout().logoutUrl("/logout").logoutSuccessUrl("/authentication");
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/");
 
         return http.build();
     }

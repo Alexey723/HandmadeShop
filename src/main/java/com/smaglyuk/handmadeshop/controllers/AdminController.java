@@ -6,7 +6,6 @@ import com.smaglyuk.handmadeshop.services.CategoryService;
 import com.smaglyuk.handmadeshop.services.OrderService;
 import com.smaglyuk.handmadeshop.services.PersonService;
 import com.smaglyuk.handmadeshop.services.ProductService;
-import com.smaglyuk.handmadeshop.util.PersonValidator;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -182,7 +181,7 @@ public class AdminController {
     @GetMapping("admin/person/delete/{id}")
     public String deletePerson(@PathVariable("id") int id) {
         personService.deletePerson(id);
-        return "redirect:/admin";
+        return "redirect:/users_edit";
     }
 
     @GetMapping("/admin/orders")
