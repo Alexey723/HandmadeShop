@@ -127,8 +127,8 @@
                                     <br>
                                     <div class="d-flex justify-content-center">
                                         <form method="get" th:action="@{/admin/orders/change_status/{id}(id=${order.getId()})}">
-                                            <label for="status" class="user-link text-center">Выберите статус: </label>
-                                            <select id="status" name="statusValue" class="form-select-sm" style="width: fit-content;">
+                                            <label for="status2" class="user-link text-center">Выберите статус: </label>
+                                            <select id="status2" name="statusValue" class="form-select-sm" style="width: fit-content;">
                                                 <option th:each="enumm : ${T(com.smaglyuk.handmadeshop.enumm.Status).values()}"
                                                         th:text="${enumm}"
                                                         th:value = "${enumm}">
