@@ -14,16 +14,18 @@
                 <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"  id="brand">
                     Иван и Сова
                 </a>
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"  id="hrefs">
-                    <li><a href="/" class="nav-link px-2 text-secondary">Главная</a></li>
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" id="hrefs">
+                    <li><a href="/person account" class="nav-link px-2 text-secondary">Главная</a></li>
+                    <li><a href="/users_edit" class="nav-link px-2 text-white">Пользователи</a></li>
+                    <li><a href="/admin/orders" class="nav-link px-2 text-white">Заказы</a></li>
+                    <li><a href="/admin/product/add" class="nav-link px-2 text-white">Добавить товар</a></li>
                 </ul>
                 <div class="text-end d-inline-flex px-2">
-
-                    <a href="/authentication"><button type="button" class="btn btn-outline-light me-2">Вход</button></a>
-                    <a href="/registration"><button type="button" class="btn btn-success">Регистрация</button></a>
-
+                    <form method="post" th:action="@{/logout}">
+                        <input type="hidden" th:name="_csrf.parameterName" th:value="${_csrf.token}">
+                        <button type="submit" class="btn btn-outline-light me-2">Выйти из личного кабинета</button>
+                    </form>
                 </div>
-
             </div>
         </div>
     </header>
@@ -53,6 +55,11 @@
                 </div>
             </figcaption>
         </div>
+        <div class="bottom-wrap justify-content-center">
+            <a th:href="@{/admin/product/edit/{id}(id=${product.getId()})}"><button type="button" class="btn bg-edit">Редактировать товар</button></a><br>
+            <a th:href="@{/admin/product/delete/{id}(id=${product.getId()})}"><button type="button" class="btn bg-delete"><i class="fa fa-cart-plus mr-2"></i> Удалить товар</button></a>
+        </div>
+    </figure>
     </figure>
 </div>
 

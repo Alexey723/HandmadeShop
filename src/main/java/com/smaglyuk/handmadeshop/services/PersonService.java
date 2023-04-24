@@ -27,6 +27,10 @@ public class PersonService {
         return optionalPerson.orElse(null);
     }
 
+    public List<Person> orderById(){
+        return personRepository.orderByIDAsc();
+    }
+
     public Person findByLogin(Person person){
         Optional<Person> person_db = personRepository.findByLogin(person.getLogin());
         return person_db.orElse(null);

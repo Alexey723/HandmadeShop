@@ -3,6 +3,10 @@ body {
     height: 100%;
 }
 
+#hrefs{
+    font-size: 16px;
+}
+
 body {
     display: flex;
     align-items: center;

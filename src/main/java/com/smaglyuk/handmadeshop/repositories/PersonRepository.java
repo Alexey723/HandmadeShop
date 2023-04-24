@@ -15,6 +15,8 @@ import java.util.Optional;
 public interface PersonRepository extends JpaRepository<Person, Integer> {
     Optional<Person> findByLogin(String login);
 
+    @Query(value = "select * from person order by id",nativeQuery = true)
+    List<Person> orderByIDAsc();
 
     @Modifying
     @Query("UPDATE Person person SET person.role = 'ROLE_ADMIN' WHERE person.id = ?1")

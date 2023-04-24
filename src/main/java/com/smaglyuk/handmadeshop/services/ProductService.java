@@ -23,6 +23,11 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    public List<Product> orderById(){
+        return productRepository.orderByIDAsc();
+    }
+
+
     // Данный метод позволяет получить товар по id
     public Product getProductId(int id){
         Optional<Product> optionalProduct = productRepository.findById(id);

@@ -130,6 +130,7 @@ public class AdminController {
     public String admin(Model model)
     {
         model.addAttribute("products", productService.getAllProduct());
+        model.addAttribute("products", productService.orderById());
         return "admin/admin";
     }
 
@@ -146,6 +147,12 @@ public class AdminController {
         return "product/editProduct";
     }
 
+    @GetMapping("/person account/admin/info/{id}")
+    public String infoProduct(@PathVariable("id") int id, Model model){
+        model.addAttribute("product", productService.getProductId(id));
+        return "/admin/infoProduct";
+    }
+
     @PostMapping("admin/product/edit/{id}")
     public String editProduct(@ModelAttribute("product") @Valid Product product, BindingResult bindingResult, @PathVariable("id") int id, Model model){
         if(bindingResult.hasErrors()){
@@ -159,6 +166,7 @@ public class AdminController {
     @GetMapping("/users_edit")
     public String editUsers(Model model){
         model.addAttribute("person", personService.getAllPerson());
+        model.addAttribute("person", personService.orderById());
         return "admin/users_edit";
     }
 
@@ -187,6 +195,7 @@ public class AdminController {
     @GetMapping("/admin/orders")
     public String ordersView(Model model) {
         model.addAttribute("orders", orderService.getAllOrders());
+        model.addAttribute("orders", orderService.orderById());
         return "admin/orders";
     }
 

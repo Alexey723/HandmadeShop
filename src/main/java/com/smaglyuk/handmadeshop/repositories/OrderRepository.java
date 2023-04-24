@@ -15,6 +15,9 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<Order, Integer> {
     List<Order> findByPerson(Person person);
 
+    @Query(value = "select * from orders order by id",nativeQuery = true)
+    List<Order> orderByIDAsc();
+
     @Modifying
     @Query("UPDATE Order orders SET orders.status = ?1 WHERE orders.id = ?2")
     int updateOrderStatus(Status status, int id);

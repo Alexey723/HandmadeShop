@@ -2,6 +2,7 @@ package com.smaglyuk.handmadeshop.services;
 
 import com.smaglyuk.handmadeshop.enumm.Status;
 import com.smaglyuk.handmadeshop.models.Order;
+import com.smaglyuk.handmadeshop.models.Person;
 import com.smaglyuk.handmadeshop.models.Product;
 import com.smaglyuk.handmadeshop.repositories.OrderRepository;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,10 @@ public class OrderService {
 
     public List<Order> findOrderByNumber(String numbers){
         return orderRepository.findByNumberContaining(numbers);
+    }
+
+    public List<Order> orderById(){
+        return orderRepository.orderByIDAsc();
     }
 
     @Transactional

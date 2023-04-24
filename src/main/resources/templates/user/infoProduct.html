@@ -14,8 +14,8 @@
             <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"  id="brand">
                 Иван и Сова
             </a>
-            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="/" class="nav-link px-2 text-secondary">Главная</a></li>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"  id="hrefs">
+                <li><a href="/person account" class="nav-link px-2 text-secondary">Главная</a></li>
                 <li><a href="/cart" class="nav-link px-2 text-white">Корзина</a></li>
                 <li><a href="/orders" class="nav-link px-2 text-white">Мои заказы</a></li>
             </ul>
@@ -42,12 +42,14 @@
         <div class="bottom-wrap-payment">
             <figcaption class="info-wrap">
                 <div class="row">
-                    <div class="col-md-9 col-xs-9">
+                    <div class="col-md-9 col-xs-9" id="info">
                         <p class="ps-4" data-abc="true" th:text="'Наименование: ' + ${product.getTitle()}">
                         <hr>
                         <p class="title ps-4" data-abc="true" th:text="'Описание: ' + ${product.getDescription()}"></p>
                         <hr>
                         <p class="title ps-4" data-abc="true" th:text="'Категория: ' + ${product.getCategory().getName()}"></p>
+                        <hr>
+                        <p class="title ps-4" data-abc="true" th:text="'Дата добавления товара: ' + ${product.getDateTime()}">
                         <hr>
                         <p class="title ps-4" data-abc="true" th:text="'Цена: ' + ${product.getPrice()}">
                         </p>

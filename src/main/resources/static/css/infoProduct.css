@@ -2,6 +2,10 @@ a {
     text-decoration: none !important
 }
 
+#hrefs{
+    font-size: 16px;
+}
+
 .card-product-list, .card-product-grid {
     margin-bottom: 0
 }
@@ -173,10 +177,6 @@ body {
     height: 350px;
 }
 
-.star{
-    color: red;
-}
-
 .bg-cart {
     background-color:orange;
     color:#fff;
@@ -187,13 +187,24 @@ body {
     color:#fff;
 }
 
-.bg-buy {
+
+.bg-edit {
     background-color:green;
     color:#fff;
-    padding-right: 29px;
 }
-.bg-buy:hover {
 
+.bg-edit:hover {
+    background-color:blue;
+    color:#fff;
+}
+
+.bg-delete {
+    background-color:red;
+    color:#fff;
+}
+
+.bg-delete:hover {
+    background-color:darkred;
     color:#fff;
 }
 
